@@ -1,26 +1,19 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import { useInfiniteQuery } from "react-query";
+import { useInfiniteQuery, useQueryClient } from "react-query";
+import { useHistory } from "react-router-dom";
 import fetchUsers from "../../api/fetchFunction";
 import UserCard from "./UserCard";
 import UserDetailsModal from "./DetailsModal";
-import { User } from "../../api/types";
+import Header from "./Header";
+import { User, NatSet } from "../../api/types";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     users: {
       display: "flex",
       flexWrap: "wrap",
-      justifyContent: "space-evenly",
-    },
-    title: {
-      padding: theme.spacing(3),
-      fontFamily: "moon",
-    },
-    filter: {
-      position: "sticky",
-      top: 0,
+      justifyContent: "center",
     },
   }),
 );
@@ -28,19 +21,25 @@ const useStyles = makeStyles((theme: Theme) =>
 function AddressBook() {
   const [pageNumber, setPageNumber] = useState(1);
   const [users, setUsers] = useState<User[]>([]);
+  const [natList, setNatList] = useState<NatSet>([]);
   const [selectedUser, setSelectedUser] = useState<User | null>();
   const classes = useStyles();
+  const queryClient = useQueryClient();
+  const history = useHistory();
 
   const {
     status,
     data,
     isFetching,
     isFetchingNextPage,
-    fetchNextPage,
     hasNextPage,
-  } = useInfiniteQuery(["users", pageNumber], () => fetchUsers(pageNumber), {
-    refetchOnWindowFocus: false,
-  });
+  } = useInfiniteQuery(
+    ["users", natList, pageNumber],
+    () => fetchUsers(natList, pageNumber),
+    {
+      refetchOnWindowFocus: false,
+    },
+  );
 
   const observer = useRef<IntersectionObserver | null>(null);
   const lastUserRef = useCallback(
@@ -58,6 +57,15 @@ function AddressBook() {
   );
 
   useEffect(() => {
+    const defaultNatList: NatSet = [];
+    const storageValue = window.localStorage.getItem("NationalityList");
+    const nationalities = storageValue
+      ? JSON.parse(storageValue)
+      : defaultNatList;
+    setNatList(nationalities);
+  }, []);
+
+  useEffect(() => {
     if (data && !isFetching && status === "success") {
       const newUsers = data.pages[0];
       setUsers((prevUsers) => {
@@ -65,6 +73,13 @@ function AddressBook() {
       });
     }
   }, [data, isFetching, status]);
+
+  // prefetch the next batch of users
+  useEffect(() => {
+    queryClient.prefetchInfiniteQuery(["users", natList, pageNumber + 1], () =>
+      fetchUsers(natList, pageNumber + 1),
+    );
+  }, [users]);
 
   const getButtonText = (): string => {
     if (isFetchingNextPage) {
@@ -80,12 +95,20 @@ function AddressBook() {
     setSelectedUser(null);
   };
 
+  const handleSearchClick = () => {
+    console.log("search");
+  };
+
+  const handleSettingsClick = () => {
+    history.push("/settings");
+  };
+
   return (
-    <div>
-      <Typography variant="h3" align="center" className={classes.title}>
-        Address Book
-      </Typography>
-      <div className={classes.filter}>Filter comes here...</div>
+    <React.Fragment>
+      <Header
+        onSearchClick={handleSearchClick}
+        onSettingsClick={handleSettingsClick}
+      />
       {users && (
         <div className={classes.users}>
           {users.map((user, index) => (
@@ -105,7 +128,7 @@ function AddressBook() {
           onClose={handleModalClose}
         />
       )}
-    </div>
+    </React.Fragment>
   );
 }
 

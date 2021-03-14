@@ -32,3 +32,5 @@ export type UserData = {
     results: User[];
   };
 };
+
+export type NatSet = ("CH" | "ES" | "FR" | "GB")[];

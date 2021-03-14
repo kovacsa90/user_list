@@ -6,7 +6,8 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
+import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
+import Tooltip from "@material-ui/core/Tooltip";
 import { User } from "../../api/types";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -40,9 +41,14 @@ const UserCard = React.forwardRef(
       <Card ref={ref} className={classes.card}>
         <CardHeader
           action={
-            <IconButton onClick={() => onInfoClick(user)} aria-label="settings">
-              <MoreVertIcon />
-            </IconButton>
+            <Tooltip title="User details" placement="bottom">
+              <IconButton
+                onClick={() => onInfoClick(user)}
+                aria-label="details"
+              >
+                <InfoOutlinedIcon />
+              </IconButton>
+            </Tooltip>
           }
           title={`${user.name.first} ${user.name.last}`}
           subheader={user.login.username}
