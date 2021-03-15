@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import { useInfiniteQuery, useQueryClient } from "react-query";
-import { useHistory } from "react-router-dom";
+import Alert from "@material-ui/lab/Alert";
 import fetchUsers from "../../api/fetchFunction";
 import UserCard from "./UserCard";
 import UserDetailsModal from "./DetailsModal";
 import Header from "./Header";
+import { useFilters } from "../../context/FilterContext";
 import { User, NatSet } from "../../api/types";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -15,6 +16,13 @@ const useStyles = makeStyles((theme: Theme) =>
       flexWrap: "wrap",
       justifyContent: "center",
     },
+    alert: {
+      width: "30%",
+      margin: "5px auto 5px auto",
+    },
+    loadingText: {
+      textAlign: "center",
+    },
   }),
 );
 
@@ -23,21 +31,20 @@ function AddressBook() {
   const [users, setUsers] = useState<User[]>([]);
   const [natList, setNatList] = useState<NatSet>([]);
   const [selectedUser, setSelectedUser] = useState<User | null>();
+
+  const { filters } = useFilters();
   const classes = useStyles();
   const queryClient = useQueryClient();
-  const history = useHistory();
 
-  const {
-    status,
-    data,
-    isFetching,
-    isFetchingNextPage,
-    hasNextPage,
-  } = useInfiniteQuery(
+  const isActiveFilter = filters.firstName || filters.lastName;
+  const isCatalogueEnd = users.length >= 1000;
+
+  const { status, data, isFetching, hasNextPage } = useInfiniteQuery(
     ["users", natList, pageNumber],
     () => fetchUsers(natList, pageNumber),
     {
       refetchOnWindowFocus: false,
+      enabled: !isActiveFilter && !isCatalogueEnd,
     },
   );
 
@@ -76,52 +83,56 @@ function AddressBook() {
 
   // prefetch the next batch of users
   useEffect(() => {
-    queryClient.prefetchInfiniteQuery(["users", natList, pageNumber + 1], () =>
-      fetchUsers(natList, pageNumber + 1),
-    );
+    if (!isActiveFilter && !isCatalogueEnd) {
+      queryClient.prefetchInfiniteQuery(
+        ["users", natList, pageNumber + 1],
+        () => fetchUsers(natList, pageNumber + 1),
+      );
+    }
   }, [users]);
 
-  const getButtonText = (): string => {
-    if (isFetchingNextPage) {
-      return "Loading more...";
-    }
-    if (hasNextPage) {
-      return "Load Older";
-    }
-    return "Nothing more to load";
-  };
+  const endMessage = isActiveFilter
+    ? "Clear filters to fetch more users"
+    : "End of users catalogue";
 
   const handleModalClose = () => {
     setSelectedUser(null);
   };
 
-  const handleSearchClick = () => {
-    console.log("search");
+  const getFilteredUsers = () => {
+    const firstPattern = new RegExp(filters.firstName, "i");
+    const lastPattern = new RegExp(filters.lastName, "i");
+    return users.filter((user) => {
+      return (
+        user.name.first.match(firstPattern) && user.name.last.match(lastPattern)
+      );
+    });
   };
 
-  const handleSettingsClick = () => {
-    history.push("/settings");
-  };
+  const filteredUsers =
+    !filters.firstName && !filters.lastName ? users : getFilteredUsers();
+
+  const userList = filteredUsers.map((user, index) => (
+    <UserCard
+      ref={users.length === index + 1 ? lastUserRef : null}
+      key={user.login.uuid}
+      user={user}
+      onInfoClick={setSelectedUser}
+    />
+  ));
 
   return (
     <React.Fragment>
-      <Header
-        onSearchClick={handleSearchClick}
-        onSettingsClick={handleSettingsClick}
-      />
-      {users && (
-        <div className={classes.users}>
-          {users.map((user, index) => (
-            <UserCard
-              ref={users.length === index + 1 ? lastUserRef : null}
-              key={user.login.uuid}
-              user={user}
-              onInfoClick={setSelectedUser}
-            />
-          ))}
-          <div>{isFetching ? "Loading items..." : null}</div>
-        </div>
-      )}
+      <Header />
+      {users && <div className={classes.users}>{userList}</div>}
+      <div className={classes.loadingText}>
+        {isFetching ? "Loading items..." : null}
+      </div>
+      <div className={classes.alert}>
+        {isActiveFilter || isCatalogueEnd ? (
+          <Alert severity="info">{endMessage}</Alert>
+        ) : null}
+      </div>
       {selectedUser && (
         <UserDetailsModal
           selectedUser={selectedUser}

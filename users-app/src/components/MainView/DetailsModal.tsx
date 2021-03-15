@@ -1,18 +1,33 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import classNames from "classnames";
+import { makeStyles, Theme } from "@material-ui/core/styles";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
+import Avatar from "@material-ui/core/Avatar";
 import { User } from "../../api/types";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme: Theme) => ({
   title: {
     fontFamily: "moon",
   },
   dialog: {
     minWidth: "500px",
+  },
+  fullName: {
+    fontWeight: "bold",
+  },
+  textDetail: {
+    margin: theme.spacing(1),
+    textAlign: "center",
+  },
+  avatar: {
+    width: "60px",
+    height: "60px",
+    marginLeft: "50%",
+    transform: "translateX(-50%)",
   },
 }));
 
@@ -26,6 +41,18 @@ const UserDetailsModal: React.FC<UserDetailsModalProps> = ({
   onClose,
 }: UserDetailsModalProps): React.ReactElement => {
   const classes = useStyles();
+  const fullName = `${selectedUser.name.first} ${selectedUser.name.last}`;
+  const street = `Street: ${selectedUser.location.street.name}`;
+  const city = `City: ${selectedUser.location.city}`;
+  const state = `State: ${selectedUser.location.state}`;
+  const postcode = `Postcode: ${selectedUser.location.postcode}`;
+  const phone = `Phone: ${selectedUser.phone}`;
+  const cell = `Cell: ${selectedUser.cell}`;
+
+  const allFields = [street, city, state, postcode, phone, cell];
+  const filedsList = allFields.map((field) => (
+    <div className={classes.textDetail}>{field}</div>
+  ));
 
   return (
     <Dialog
@@ -40,9 +67,17 @@ const UserDetailsModal: React.FC<UserDetailsModalProps> = ({
       <DialogTitle>
         <span className={classes.title}>User Details</span>
       </DialogTitle>
-      <DialogContent
-        className={classes.dialog}
-      >{`${selectedUser.name.first} ${selectedUser.name.last}`}</DialogContent>
+      <DialogContent className={classes.dialog}>
+        <Avatar
+          className={classes.avatar}
+          alt={fullName}
+          src={selectedUser.picture.thumbnail}
+        />
+        <div className={classNames(classes.fullName, classes.textDetail)}>
+          {fullName}
+        </div>
+        {filedsList}
+      </DialogContent>
       <DialogActions>
         <Button onClick={onClose} data-testid="close_details" color="secondary">
           Close
