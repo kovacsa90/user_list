@@ -25,7 +25,7 @@ In the users-app directory, you can run:
 - Data fetching/prefetching is stopped while the name filters are active, so the search happens for the fetched data only.
 
 <p align="center">
-  <img src="./screenshots/mainView.PNG">
+  <img src="screenshots/mainView.PNG">
 </p>
 
 ## Settings View
@@ -35,7 +35,7 @@ In the users-app directory, you can run:
 - Saving the results will store the filter set in the local storage with "NationalityList" key to persisit between refreshes.
 
 <p align="center">
-  <img src="./screenshots/selectNat.PNG">
+  <img src="screenshots/selectNat.PNG">
 </p>
 
 ## Details modal
@@ -43,7 +43,7 @@ In the users-app directory, you can run:
 - User card's info button shows a modal window with further details of the given user.
 
 <p align="center">
-  <img src="./screenshots/details.PNG">
+  <img src="screenshots/details.PNG">
 </p>
 
 ## Name filters
@@ -53,5 +53,5 @@ In the users-app directory, you can run:
 - Filtering is debounced with 1 second.
 
 <p align="center">
-  <img src="./screenshots/nameFilter.PNG">
+  <img src="screenshots/nameFilter.PNG">
 </p>
