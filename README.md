@@ -12,7 +12,7 @@ npm i
 In the users-app directory, you can run:
 
 - npm start
-- npm test (OR npm test -- --coverage).
+- npm test (OR npm test -- --coverage) More tests will be added in folloing commits!
 
 # Views
 

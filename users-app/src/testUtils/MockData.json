@@ -1,0 +1,121 @@
+{
+  "results": [
+    {
+      "gender": "male",
+      "name": { "title": "Mr", "first": "Léon", "last": "Petit" },
+      "location": {
+        "street": { "number": 7185, "name": "Rue Barrème" },
+        "city": "Toulon",
+        "state": "Hautes-Alpes",
+        "country": "France",
+        "postcode": 34586,
+        "coordinates": { "latitude": "30.2219", "longitude": "-40.7775" },
+        "timezone": {
+          "offset": "+9:00",
+          "description": "Tokyo, Seoul, Osaka, Sapporo, Yakutsk"
+        }
+      },
+      "email": "leon.petit@example.com",
+      "login": {
+        "uuid": "9ceb6e74-4380-4571-ac3b-fb8e59d950de",
+        "username": "bluepanda979",
+        "password": "rommel",
+        "salt": "rlGcwBe4",
+        "md5": "bc11cdc913a8d620d818a5aeee453857",
+        "sha1": "1c4dd8ed4e93d0c9fd075a7eb595e1098cea1f8f",
+        "sha256": "8c15bc80640f8fec65ba20f611cc1b4d8cbc10f62e82cb15ea8bd7ecca4bfd21"
+      },
+      "dob": { "date": "1983-02-01T13:44:13.955Z", "age": 38 },
+      "registered": { "date": "2011-04-18T16:36:27.844Z", "age": 10 },
+      "phone": "02-58-53-08-88",
+      "cell": "06-32-98-75-39",
+      "id": { "name": "INSEE", "value": "1NNaN09807143 85" },
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/men/91.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/men/91.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/men/91.jpg"
+      },
+      "nat": "FR"
+    },
+    {
+      "gender": "male",
+      "name": { "title": "Mr", "first": "Levi", "last": "Shaw" },
+      "location": {
+        "street": { "number": 6409, "name": "The Avenue" },
+        "city": "Wells",
+        "state": "Cheshire",
+        "country": "United Kingdom",
+        "postcode": "DN12 4WZ",
+        "coordinates": { "latitude": "69.6057", "longitude": "-54.2915" },
+        "timezone": {
+          "offset": "-8:00",
+          "description": "Pacific Time (US & Canada)"
+        }
+      },
+      "email": "levi.shaw@example.com",
+      "login": {
+        "uuid": "3feb96e0-ed0b-4175-9b05-9d2ade1dac70",
+        "username": "beautifulgorilla884",
+        "password": "wombat",
+        "salt": "NUEaZfFu",
+        "md5": "10031d499b601f2e02f79ed273d1d46f",
+        "sha1": "1806f92c13847260758bdbef0001f50000ec15fe",
+        "sha256": "54dc8c024d651df299893baf625368a025503b747f97e5e9c22d27a57dcd0e45"
+      },
+      "dob": { "date": "1976-07-23T18:54:52.657Z", "age": 45 },
+      "registered": { "date": "2019-09-03T21:17:01.512Z", "age": 2 },
+      "phone": "016973 53939",
+      "cell": "0753-732-993",
+      "id": { "name": "NINO", "value": "NG 33 55 47 O" },
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/men/5.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/men/5.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/men/5.jpg"
+      },
+      "nat": "GB"
+    },
+    {
+      "gender": "female",
+      "name": { "title": "Mrs", "first": "Mathilde", "last": "Chevalier" },
+      "location": {
+        "street": { "number": 1621, "name": "Rue Chazière" },
+        "city": "Colombes",
+        "state": "Vosges",
+        "country": "France",
+        "postcode": 49167,
+        "coordinates": { "latitude": "58.6239", "longitude": "-146.0327" },
+        "timezone": {
+          "offset": "0:00",
+          "description": "Western Europe Time, London, Lisbon, Casablanca"
+        }
+      },
+      "email": "mathilde.chevalier@example.com",
+      "login": {
+        "uuid": "85f06d9f-0823-404f-b105-52f610c55721",
+        "username": "orangemouse998",
+        "password": "walmart",
+        "salt": "nnio6vOW",
+        "md5": "ab56d5b88e3173aacf97e800526e08d4",
+        "sha1": "7e452df1eb9e99d1b59a25b5b59e39ff8d3fa426",
+        "sha256": "541890087b84da06bae1d16a2c02e3c5a773b253f1f2348b0852b4f0761bfc2d"
+      },
+      "dob": { "date": "1965-02-19T19:56:34.899Z", "age": 56 },
+      "registered": { "date": "2004-05-18T16:11:52.697Z", "age": 17 },
+      "phone": "05-75-44-24-57",
+      "cell": "06-85-91-85-53",
+      "id": { "name": "INSEE", "value": "2NNaN83294837 73" },
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/women/41.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/women/41.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/women/41.jpg"
+      },
+      "nat": "FR"
+    }
+  ],
+  "info": {
+    "seed": "24f22a383d71b5fb",
+    "results": 3,
+    "page": 1,
+    "version": "1.3"
+  }
+}
