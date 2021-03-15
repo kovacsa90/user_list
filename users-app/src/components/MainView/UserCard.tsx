@@ -1,5 +1,4 @@
 import React from "react";
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
@@ -9,24 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import Tooltip from "@material-ui/core/Tooltip";
 import { User } from "../../api/types";
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    card: {
-      width: "350px",
-      margin: theme.spacing(1),
-    },
-    picture: {
-      margin: "auto",
-      height: "150px",
-      width: "150px",
-      borderRadius: "50%",
-    },
-    content: {
-      textAlign: "center",
-    },
-  }),
-);
+import { useUserStyles } from "./styles";
 
 interface UserCardProps {
   user: User;
@@ -35,7 +17,7 @@ interface UserCardProps {
 
 const UserCard = React.forwardRef(
   ({ user, onInfoClick }: UserCardProps, ref) => {
-    const classes = useStyles();
+    const classes = useUserStyles();
 
     return (
       <Card ref={ref} className={classes.card}>

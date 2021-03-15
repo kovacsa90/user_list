@@ -5,7 +5,7 @@ async function fetchUsers(natSet: NatSet, pageNumber: number): Promise<User[]> {
   const natList = natSet.join();
   try {
     const res: UserData = await axios.get(
-      `https://randomuser.me/api/?nat=${natList}&page=${pageNumber}&results=10`,
+      `https://randomuser.me/api/?nat=${natList}&page=${pageNumber}&results=50`,
     );
     return res.data.results;
   } catch (err) {

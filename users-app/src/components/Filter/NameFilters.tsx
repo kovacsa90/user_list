@@ -1,26 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import { useFilters } from "../../context/FilterContext";
-
-const useStyles = makeStyles((theme) => ({
-  filter: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: "200px",
-  },
-  resetButton: {
-    marginTop: theme.spacing(1),
-    marginRight: theme.spacing(2),
-  },
-}));
+import useFilterStyles from "./styles";
 
 const NameFilters: React.FC = () => {
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
   const { setFilter } = useFilters();
-  const classes = useStyles();
+  const classes = useFilterStyles();
 
   // debounced filtering with 1 sec delay
   useEffect(() => {

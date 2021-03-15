@@ -1,40 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import NatOption from "./NatOption";
 import { NationMap, NationKeys } from "./types";
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    header: {
-      padding: theme.spacing(3),
-      height: "100%",
-    },
-    title: {
-      fontFamily: "moon",
-    },
-    options: {
-      width: "25%",
-      position: "absolute",
-      top: "50%",
-      left: "50%",
-      transform: "translate(-50%, -50%)",
-    },
-    buttons: {
-      textAlign: "center",
-      margin: theme.spacing(2),
-    },
-  }),
-);
-
-type NatSet = NationKeys[];
+import { NatSet } from "../../api/types";
+import { useSettingsStyles } from "./styles";
 
 const FilterSettings: React.FC = (): React.ReactElement => {
   const [selectedNats, setSelectedNats] = useState<NatSet>([]);
   const history = useHistory();
-  const classes = useStyles();
+  const classes = useSettingsStyles();
 
   useEffect(() => {
     // No filters are set by default
@@ -60,6 +36,7 @@ const FilterSettings: React.FC = (): React.ReactElement => {
       "NationalityList",
       JSON.stringify(selectedNats),
     );
+    history.push("/");
   };
 
   const handleGoBack = () => {

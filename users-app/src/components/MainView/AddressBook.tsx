@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import { useInfiniteQuery, useQueryClient } from "react-query";
 import Alert from "@material-ui/lab/Alert";
 import fetchUsers from "../../api/fetchFunction";
@@ -8,32 +7,16 @@ import UserDetailsModal from "./DetailsModal";
 import Header from "./Header";
 import { useFilters } from "../../context/FilterContext";
 import { User, NatSet } from "../../api/types";
+import { useMainStyles } from "./styles";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    users: {
-      display: "flex",
-      flexWrap: "wrap",
-      justifyContent: "center",
-    },
-    alert: {
-      width: "30%",
-      margin: "5px auto 5px auto",
-    },
-    loadingText: {
-      textAlign: "center",
-    },
-  }),
-);
-
-function AddressBook() {
+const AddressBook: React.FC = () => {
   const [pageNumber, setPageNumber] = useState(1);
   const [users, setUsers] = useState<User[]>([]);
   const [natList, setNatList] = useState<NatSet>([]);
   const [selectedUser, setSelectedUser] = useState<User | null>();
 
   const { filters } = useFilters();
-  const classes = useStyles();
+  const classes = useMainStyles();
   const queryClient = useQueryClient();
 
   const isActiveFilter = filters.firstName || filters.lastName;
@@ -64,6 +47,7 @@ function AddressBook() {
   );
 
   useEffect(() => {
+    // No filters are set by default
     const defaultNatList: NatSet = [];
     const storageValue = window.localStorage.getItem("NationalityList");
     const nationalities = storageValue
@@ -141,6 +125,6 @@ function AddressBook() {
       )}
     </React.Fragment>
   );
-}
+};
 
 export default AddressBook;

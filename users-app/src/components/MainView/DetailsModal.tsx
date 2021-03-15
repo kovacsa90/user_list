@@ -1,6 +1,5 @@
 import React from "react";
 import classNames from "classnames";
-import { makeStyles, Theme } from "@material-ui/core/styles";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -8,28 +7,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Button from "@material-ui/core/Button";
 import Avatar from "@material-ui/core/Avatar";
 import { User } from "../../api/types";
-
-const useStyles = makeStyles((theme: Theme) => ({
-  title: {
-    fontFamily: "moon",
-  },
-  dialog: {
-    minWidth: "500px",
-  },
-  fullName: {
-    fontWeight: "bold",
-  },
-  textDetail: {
-    margin: theme.spacing(1),
-    textAlign: "center",
-  },
-  avatar: {
-    width: "60px",
-    height: "60px",
-    marginLeft: "50%",
-    transform: "translateX(-50%)",
-  },
-}));
+import { useDetailsStyles } from "./styles";
 
 interface UserDetailsModalProps {
   selectedUser: User;
@@ -40,7 +18,7 @@ const UserDetailsModal: React.FC<UserDetailsModalProps> = ({
   selectedUser,
   onClose,
 }: UserDetailsModalProps): React.ReactElement => {
-  const classes = useStyles();
+  const classes = useDetailsStyles();
   const fullName = `${selectedUser.name.first} ${selectedUser.name.last}`;
   const street = `Street: ${selectedUser.location.street.name}`;
   const city = `City: ${selectedUser.location.city}`;
