@@ -28,12 +28,7 @@ const Header: React.FC = (): React.ReactElement => {
         Address Book
       </Typography>
       <div className={classes.headerActions}>
-        {showFilters && (
-          <div className={classes.animatedItem}>
-            <NameFilters />
-          </div>
-        )}
-
+        {showFilters && <NameFilters />}
         <HeaderActions
           onSearchClick={handleSearchClick}
           onSettingsClick={handleSettingsClick}

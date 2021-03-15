@@ -1,6 +1,6 @@
 import { makeStyles, Theme } from "@material-ui/core/styles";
 
-export const useMainStyles = makeStyles(() => ({
+export const useMainStyles = makeStyles((theme: Theme) => ({
   users: {
     display: "flex",
     flexWrap: "wrap",
@@ -12,6 +12,18 @@ export const useMainStyles = makeStyles(() => ({
   },
   loadingText: {
     textAlign: "center",
+    animation: `$loadingEffect 1500ms infinite ${theme.transitions.easing.easeInOut}`,
+  },
+  "@keyframes loadingEffect": {
+    "0%": {
+      opacity: 0.4,
+    },
+    "50%": {
+      opacity: 1,
+    },
+    "100%": {
+      opacity: 0.4,
+    },
   },
 }));
 
@@ -54,19 +66,6 @@ export const useHeaderStyles = makeStyles((theme: Theme) => ({
   headerActions: {
     display: "flex",
     margin: "auto 10px",
-  },
-  animatedItem: {
-    animation: `$slideInEffect 1000ms ${theme.transitions.easing.easeInOut}`,
-  },
-  "@keyframes slideInEffect": {
-    "0%": {
-      opacity: 0,
-      transform: "translateY(-200%)",
-    },
-    "100%": {
-      opacity: 1,
-      transform: "translateY(0)",
-    },
   },
 }));
 
