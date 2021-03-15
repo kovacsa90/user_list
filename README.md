@@ -9,7 +9,7 @@ npm i
 
 ## Available Scripts
 
-In the items-app directory, you can run:
+In the users-app directory, you can run:
 
 - npm start
 - npm test (OR npm test -- --coverage).
