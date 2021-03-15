@@ -12,7 +12,7 @@ npm i
 In the users-app directory, you can run:
 
 - npm start
-- npm test (OR npm test -- --coverage) More tests will be added in folloing commits!
+- npm test (OR npm test -- --coverage) More tests will be added in following commits!
 
 # Views
 
@@ -31,7 +31,7 @@ In the users-app directory, you can run:
 ## Settings View
 
 - All the 17 nationalities are enabled by default (when no nationality filter is selected).
-- To narrow down the users by nationality, one or more of "CH", "ES", "FR", "BR" can be selected.
+- To narrow down the users by nationality, one or more of "CH", "ES", "FR", "GB" can be selected.
 - Saving the results will store the filter set in the local storage with "NationalityList" key to persisit between refreshes.
 
 <p align="center">
