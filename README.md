@@ -12,7 +12,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 In the users-app directory, you can run:
 
 - npm start
-- npm test (OR npm test -- --coverage) More tests will be added in following commits!
+- npm test (OR npm test -- --coverage --watchAll)
 
 # Views
 

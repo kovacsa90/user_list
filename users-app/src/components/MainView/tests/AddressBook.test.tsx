@@ -72,7 +72,6 @@ describe("AddressBook actions", () => {
   test("activate name filters", async () => {
     render(withOnFilterProviders(<AddressBook />));
     fireEvent.click(screen.getByTitle(/Filter users/i));
-    screen.debug();
     expect(screen.getByText(/Clear filters to fetch more users/i)).toBeTruthy();
   });
 });

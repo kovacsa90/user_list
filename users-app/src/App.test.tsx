@@ -60,7 +60,6 @@ describe("App interactions", () => {
     await waitFor(() =>
       expect(screen.getByText(/leon.petit@example.com/i)).toBeTruthy(),
     );
-    screen.debug();
   });
   test("go to setting view", async () => {
     render(<App />);
@@ -73,6 +72,5 @@ describe("App interactions", () => {
     fireEvent.click(screen.getByText(/Spanish/i));
     fireEvent.click(screen.getByText(/French/i));
     fireEvent.click(screen.getByText(/British/i));
-    screen.debug();
   });
 });
