@@ -29,7 +29,9 @@ const UserDetailsModal: React.FC<UserDetailsModalProps> = ({
 
   const allFields = [street, city, state, postcode, phone, cell];
   const filedsList = allFields.map((field) => (
-    <div className={classes.textDetail}>{field}</div>
+    <div key={field} className={classes.textDetail}>
+      {field}
+    </div>
   ));
 
   return (

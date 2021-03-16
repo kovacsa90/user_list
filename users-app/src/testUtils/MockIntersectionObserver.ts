@@ -1,4 +1,5 @@
-export default class {
+/* eslint-disable @typescript-eslint/no-empty-function */
+export default class MockIntersectionObserver {
   readonly root: Element | null;
 
   readonly rootMargin: string;
@@ -11,13 +12,14 @@ export default class {
     this.thresholds = [];
   }
 
-  disconnect() {}
+  disconnect = (): void => {};
 
-  observe() {}
+  observe = (): void => {};
 
+  // eslint-disable-next-line class-methods-use-this
   takeRecords(): IntersectionObserverEntry[] {
     return [];
   }
 
-  unobserve() {}
+  unobserve = (): void => {};
 }

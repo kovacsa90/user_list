@@ -11,7 +11,7 @@ export type User = {
     };
     city: string;
     state: string;
-    postcode: string;
+    postcode: number | string;
   };
   email: string;
   login: {
@@ -19,7 +19,7 @@ export type User = {
     username: string;
   };
   phone: string;
-  cell: number;
+  cell: string;
   picture: {
     thumbnail: string;
     large: string;

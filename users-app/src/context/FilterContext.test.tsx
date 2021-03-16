@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen, cleanup } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { FilterProvider, useFilters } from "./FilterContext";
 
 let consoleSpy: jest.SpyInstance;
@@ -14,8 +14,7 @@ afterEach(() => {
 
 const DummyComponent: React.FC = () => {
   const { filters } = useFilters();
-  const firstName = filters.firstName;
-  const lastName = filters.lastName;
+  const { firstName, lastName } = filters;
   return <div>{`First name: ${firstName}, Last name: ${lastName}`}</div>;
 };
 
@@ -23,7 +22,7 @@ test("useFilters throws error without FilterProvider", () => {
   expect(() => render(<DummyComponent />)).toThrow();
 });
 
-test("renders the dummy component with value from the context", () => {
+test("render the dummy component with value from the context", () => {
   render(
     <FilterProvider
       context={{
