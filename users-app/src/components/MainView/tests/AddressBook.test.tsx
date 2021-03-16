@@ -65,13 +65,13 @@ describe("AddressBook actions", () => {
     await waitFor(() =>
       expect(screen.getByText(/leon.petit@example.com/i)).toBeTruthy(),
     );
-    fireEvent.click(screen.getAllByTitle("User details")[0]);
+    fireEvent.click(screen.getAllByTitle(/User details/i)[0]);
     await waitFor(() => expect(screen.getByText(/User details/i)).toBeTruthy());
     fireEvent.click(screen.getByText("Close"));
   });
   test("activate name filters", async () => {
     render(withOnFilterProviders(<AddressBook />));
-    fireEvent.click(screen.getByTitle("Filter users"));
+    fireEvent.click(screen.getByTitle(/Filter users/i));
     screen.debug();
     expect(screen.getByText(/Clear filters to fetch more users/i)).toBeTruthy();
   });

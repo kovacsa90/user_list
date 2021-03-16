@@ -18,9 +18,9 @@ describe("Render HeaderActions", () => {
         onSettingsClick={onSettingsClick}
       />,
     );
-    fireEvent.click(screen.getByTitle("Filter users"));
+    fireEvent.click(screen.getByTitle(/Filter users/i));
     expect(onSearchClick).toHaveBeenCalledTimes(1);
-    fireEvent.click(screen.getByTitle("Filter settings"));
+    fireEvent.click(screen.getByTitle(/Filter settings/i));
     expect(onSettingsClick).toHaveBeenCalledTimes(1);
   });
 });

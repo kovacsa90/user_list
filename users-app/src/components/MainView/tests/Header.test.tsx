@@ -33,17 +33,17 @@ describe("Render HeaderActions", () => {
   test("render Header", async () => {
     render(withProviders(<Header />));
     expect(screen.getByText(/Address book/i)).toBeTruthy();
-    expect(screen.getByTitle("Filter users")).toBeTruthy();
-    expect(screen.getByTitle("Filter settings")).toBeTruthy();
+    expect(screen.getByTitle(/Filter users/i)).toBeTruthy();
+    expect(screen.getByTitle(/Filter settings/i)).toBeTruthy();
   });
   test("go to settings page", async () => {
     render(withProviders(<Header />));
-    fireEvent.click(screen.getByTitle("Filter settings"));
+    fireEvent.click(screen.getByTitle(/Filter settings/i));
     expect(mockHistoryPush).toHaveBeenCalledWith("/settings");
   });
   test("render Header without filter", async () => {
     render(withProviders(<Header />));
-    fireEvent.click(screen.getByTitle("Filter users"));
+    expect(screen.getByTitle(/Filter users/i)).toBeTruthy();
     expect(setFilter).toHaveBeenCalledTimes(0);
   });
   test("render Header with filter", async () => {
@@ -52,8 +52,8 @@ describe("Render HeaderActions", () => {
         <Header />
       </FilterProvider>,
     );
-    fireEvent.click(screen.getByTitle("Filter users"));
-    fireEvent.click(screen.getByTitle("Filter users"));
+    fireEvent.click(screen.getByTitle(/Filter users/i));
+    fireEvent.click(screen.getByTitle(/Filter users/i));
     expect(setFilter).toHaveBeenCalledTimes(1);
   });
 });
